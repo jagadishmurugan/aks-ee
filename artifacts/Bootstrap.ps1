@@ -11,6 +11,7 @@ param (
     [string]$windowsNode,
     [string]$kubernetesDistribution,
     [string]$uamiClientId,
+    [string]$uamiResourceId,
     [string]$proxyCredentialsKeyVaultName,
     [string]$helmRegistry,
     [string]$enableArcGateway,
@@ -43,6 +44,11 @@ if ($helmRegistry){
 if ($uamiClientId){
     [System.Environment]::SetEnvironmentVariable('AZCOPY_AUTO_LOGIN_TYPE', "MSI",[System.EnvironmentVariableTarget]::Machine)
     [System.Environment]::SetEnvironmentVariable('AZCOPY_MSI_CLIENT_ID', $uamiClientId,[System.EnvironmentVariableTarget]::Machine)
+}
+
+if ($uamiResourceId){
+    [System.Environment]::SetEnvironmentVariable('AZCOPY_AUTO_LOGIN_TYPE', "MSI",[System.EnvironmentVariableTarget]::Machine)
+    [System.Environment]::SetEnvironmentVariable('AZCOPY_MSI_RESOURCE_STRING', $uamiResourceId,[System.EnvironmentVariableTarget]::Machine)
 }
 
 # Create path
