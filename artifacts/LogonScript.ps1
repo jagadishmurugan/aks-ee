@@ -30,7 +30,7 @@ az login --service-principal --username $Env:arcAppId --federated-token "$arcFed
 # Acquire a key vault scoped access token before the federated token expires
 az account get-access-token --scope https://vault.azure.net/.default --output none
 
-Invoke-WebRequest -Uri $msiUrl -OutFile "C:\Users\Public\aio-k3s.msi"
+Invoke-WebRequest -Uri $msiUrl -OutFile "C:\Temp\aio-k3s.msi"
 
 # download public script and config json tempaltes
 $scriptUrl = "https://raw.githubusercontent.com/jagadishmurugan/AKS-Edge/refs/heads/release-1-12/tools/scripts/AksEdgeQuickStart/AksEdgeQuickStartForAio.ps1"
