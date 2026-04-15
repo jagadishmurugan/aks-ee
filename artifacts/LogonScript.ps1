@@ -23,9 +23,9 @@ Start-Transcript -Path C:\Temp\LogonScript.log
 
 Write-Host "Starting the script execution..."
 
-$uamiId = "0edf3d3b-2f30-453e-8e40-52c488f48961"
-az login --identity --username $uamiId
-Invoke-WebRequest -Uri $msiUrl -OutFile "C:\Temp\aio-k3s.msi"
+#$uamiId = "0edf3d3b-2f30-453e-8e40-52c488f48961"
+#az login --identity --username $uamiId
+#Invoke-WebRequest -Uri $msiUrl -OutFile "C:\Temp\aio-k3s.msi"
 
 # The federated token is short lived so convert it immediately to tokens with longer lifetime.
 # Convert federated token to ARM access token
