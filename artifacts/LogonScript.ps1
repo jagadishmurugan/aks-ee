@@ -1,6 +1,7 @@
 param (
     [string]$arcFederatedToken,
-    [string]$msiUrl
+    [string]$msiUrl,
+    [string]$uamiId
 )
 
 $SubscriptionId = $env:arcSubscriptionId
@@ -23,9 +24,17 @@ Start-Transcript -Path C:\Temp\LogonScript.log
 
 Write-Host "Starting the script execution..."
 
-#$uamiId = "0edf3d3b-2f30-453e-8e40-52c488f48961"
-#az login --identity --username $uamiId
-#Invoke-WebRequest -Uri $msiUrl -OutFile "C:\Temp\aio-k3s.msi"
+if ((-Not [string]::IsNullOrEmpty($msiUrl)) -And (-Not [string]::IsNullOrEmpty($uamiId)))
+    $uri = [System.Uri]$msiUrl
+    $accountName   = $uri.Host.Split('.')[0]
+    $containerName = $uri.AbsolutePath.Split('/')[1]
+    $blobName      = $uri.AbsolutePath.Substring($uri.AbsolutePath.IndexOf('/', 1) + 1)
+
+    Write-Host "Download AKSEE msi - $blobName"
+
+    az login --identity --client-id $uamiId
+    az storage blob download --account-name $accountName --container-name $containerName --name $blobName --file "C:\Temp\aio-k3s.msi" --auth-mode login
+}
 
 # The federated token is short lived so convert it immediately to tokens with longer lifetime.
 # Convert federated token to ARM access token
