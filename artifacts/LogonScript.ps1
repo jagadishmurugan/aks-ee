@@ -1,7 +1,6 @@
 param (
     [string]$arcFederatedToken,
-    [string]$msiUrl,
-    [string]$uamiId
+    [string]$msiUrl
 )
 
 $SubscriptionId = $env:arcSubscriptionId
@@ -24,16 +23,12 @@ Start-Transcript -Path C:\Temp\LogonScript.log
 
 Write-Host "Starting the script execution..."
 
-if ((-Not [string]::IsNullOrEmpty($msiUrl)) -And (-Not [string]::IsNullOrEmpty($uamiId)))
+if (-Not [string]::IsNullOrEmpty($msiUrl))
     $uri = [System.Uri]$msiUrl
-    $accountName   = $uri.Host.Split('.')[0]
-    $containerName = $uri.AbsolutePath.Split('/')[1]
-    $blobName      = $uri.AbsolutePath.Substring($uri.AbsolutePath.IndexOf('/', 1) + 1)
+    $blobName = $uri.AbsolutePath.Substring($uri.AbsolutePath.IndexOf('/', 1) + 1)
 
     Write-Host "Download AKSEE msi - $blobName"
-
-    az login --identity --client-id $uamiId
-    az storage blob download --account-name $accountName --container-name $containerName --name $blobName --file "C:\Temp\aio-k3s.msi" --auth-mode login
+    azcopy copy $msiUrl "c:\Temp\aio-k3s.msi"
 }
 
 # The federated token is short lived so convert it immediately to tokens with longer lifetime.
