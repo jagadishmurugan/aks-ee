@@ -23,7 +23,7 @@ Start-Transcript -Path C:\Temp\LogonScript.log
 
 Write-Host "Starting the script execution..."
 
-if (-Not [string]::IsNullOrEmpty($msiUrl))
+if (-Not [string]::IsNullOrEmpty($msiUrl)) {
     $uri = [System.Uri]$msiUrl
     $blobName = $uri.AbsolutePath.Substring($uri.AbsolutePath.IndexOf('/', 1) + 1)
 
