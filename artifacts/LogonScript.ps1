@@ -62,6 +62,7 @@ $userConfigContent = $userConfigContent -replace "<tenant-id>", $TenantId
 $userConfigContent = $userConfigContent -replace "<resourcegroup-name>", $ResourceGroupName
 $userConfigContent = $userConfigContent -replace "<location>", $Location
 $userConfigContent = $userConfigContent -replace "<customlocation-oid>", $CustomLocationOid
+$userConfigContent = $userConfigContent -replace '"AksEdgeProductUrl"\s*:\s*"https?://[^"]*"', '"AksEdgeProductUrl": "C:\\Temp\\aio-k3s.msi"'
 
 # Save the updated content back to the aio-aide-userconfig.json file
 Set-Content -Path $userConfigPath -Value $userConfigContent
