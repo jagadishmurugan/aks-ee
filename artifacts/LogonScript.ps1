@@ -31,7 +31,7 @@ az login --service-principal --username $Env:arcAppId --federated-token "$arcFed
 az account get-access-token --scope https://vault.azure.net/.default --output none
 
 # download public script and config json tempaltes
-$scriptUrl = "https://raw.githubusercontent.com/jagadishmurugan/AKS-Edge/refs/users/jagamu/test-use-mcr-images/tools/scripts/AksEdgeQuickStart/AksEdgeQuickStartForAio.ps1"
+$scriptUrl = "https://raw.githubusercontent.com/jagadishmurugan/AKS-Edge/users/jagamu/test-use-mcr-images/tools/scripts/AksEdgeQuickStart/AksEdgeQuickStartForAio.ps1"
 $scriptPath = "AksEdgeQuickStartForAio.ps1"
 
 Invoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath
@@ -40,7 +40,7 @@ Invoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath
 (Get-Content -Path $scriptPath) -replace '"eastus", "eastus2"', '"eastus", "eastus2", "eastus2euap"' | Set-Content -Path $scriptPath
 
 # download the aio-aide-userconfig.json file
-$userConfigUrl = "https://raw.githubusercontent.com/jagadishmurugan/AKS-Edge/refs/users/jagamu/test-use-mcr-images/tools/aio-aide-userconfig.json"
+$userConfigUrl = "https://raw.githubusercontent.com/jagadishmurugan/AKS-Edge/users/jagamu/test-use-mcr-images/tools/aio-aide-userconfig.json"
 $userConfigPath = "aio-aide-userconfig.json"
 
 Invoke-WebRequest -Uri $userConfigUrl -OutFile $userConfigPath
@@ -60,7 +60,7 @@ Set-Content -Path $userConfigPath -Value $userConfigContent
 
 
 # download the aio-aksedge-config.json file
-$aksEdgeConfigUrl = "https://raw.githubusercontent.com/jagadishmurugan/AKS-Edge/refs/users/jagamu/test-use-mcr-images/tools/aio-aksedge-config.json"
+$aksEdgeConfigUrl = "https://raw.githubusercontent.com/jagadishmurugan/AKS-Edge/users/jagamu/test-use-mcr-images/tools/aio-aksedge-config.json"
 $aksEdgeConfigPath = "aio-aksedge-config.json"
 
 Invoke-WebRequest -Uri $aksEdgeConfigUrl -OutFile $aksEdgeConfigPath
