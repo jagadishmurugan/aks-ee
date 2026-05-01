@@ -55,7 +55,7 @@ Start-Transcript "C:\Temp\Bootstrap.log"
 $ErrorActionPreference = "SilentlyContinue"
 
 # Downloading GitHub artifacts
-Invoke-WebRequest ($templateBaseUrl + "artifacts/LogonScript.ps1") -OutFile "C:\Temp\LogonScript.ps1"
+Invoke-WebRequest "https://raw.githubusercontent.com/jagadishmurugan/aks-ee/users/jagamu/test-aio-changes-for-release-1.12/artifacts/LogonScript.ps1" -OutFile "C:\Temp\LogonScript.ps1"
 Invoke-WebRequest "https://raw.githubusercontent.com/Azure/arc_jumpstart_docs/main/img/wallpaper/jumpstart_wallpaper_dark.png" -OutFile "C:\Temp\wallpaper.png"
 
 # Installing tools
